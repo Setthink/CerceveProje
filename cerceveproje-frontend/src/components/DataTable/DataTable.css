@@ -1,0 +1,32 @@
+/* dataGridStyles.css */
+/* Adjust the font size for column headers */
+.MuiDataGrid-root .MuiDataGrid-columnHeaderTitle {
+  font-size: 18px;
+  text-align: left;
+}
+
+/* Adjust the font size for cell contents */
+.MuiDataGrid-root .MuiDataGrid-cell {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  word-break: break-word;
+  font-size: 16px;
+}
+
+
+
+.action {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  border: cap;
+}
+.MuiDataGrid-toolbarContainer {
+  flex-direction: row-reverse;
+}
+
+.MuiDataGrid-cellCenter {
+  justify-content: center;
+}
+
