@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import EditForm from "../components/EditForm";
 import { useParams} from "react-router-dom";
 import ApiService from "../api";
 import DataTable from "../components/DataTable/DataTable"; 
@@ -20,6 +21,8 @@ const EntityPage = () => {
 
   const [entityData, setEntityData] = useState(null);
   const [siparisData, setSiparisData] = useState(null);
+  const [isEditFormOpen, setEditFormOpen] = useState(false);
+  const [selectedRowData, setSelectedRowData] = useState(null);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null); // Store the selected row for deletion
 
@@ -40,8 +43,25 @@ const EntityPage = () => {
   }, [entityType]);
 
   const handleEditEntity = (row) => {
-    console.log(`Edit ${entityType} ID: ${row.id}`);
+    setSelectedRowData(row);
+    setEditFormOpen(true);
   };
+
+  const handleSaveEditedData = (editedData) => {
+    // Implement logic to save the edited data, e.g., update your data source
+    // You can use the 'editedData' and 'selectedRowData' to identify the row to update
+    // After saving, update your data source and state accordingly
+    // For example:
+    const updatedEntityData = entityData.map((row) => {
+      if (row.id === selectedRowData.id) {
+        return { ...row, ...editedData };
+      }
+      return row;
+    });
+  
+    setEntityData(updatedEntityData);
+  };
+  
 
   const handleDeleteEntity = (row) => {
     console.log(`Delete ${entityType} ID: ${row.id}`);
@@ -89,6 +109,7 @@ const EntityPage = () => {
         draggable={false}
         transition={Flip}
         />
+      <div>
       {entityData && (
         <DataTable
           rows={entityData}
@@ -102,10 +123,19 @@ const EntityPage = () => {
         <DataTable
           rows={siparisData}
           columns={siparisCol}
-          onEdit={(row) => console.log(`Edit Siparis ID: ${row.id}`)}
+          onEdit={(row) => handleEditEntity(row)}
           onDelete={(row) => handleDeleteEntity(row)} // Update the onDelete handler for siparis rows
         />
       )}
+      {isEditFormOpen && (
+          <EditForm
+            isOpen={isEditFormOpen}
+            onClose={() => setEditFormOpen(false)}
+            onSave={handleSaveEditedData}
+            initialData={selectedRowData}
+          />
+        )}
+      </div>
       <ConfirmationDialog
         isOpen={isConfirmationOpen}
         onClose={() => setIsConfirmationOpen(false)}

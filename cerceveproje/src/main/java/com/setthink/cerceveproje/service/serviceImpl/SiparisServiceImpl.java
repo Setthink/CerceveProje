@@ -71,7 +71,19 @@ public class SiparisServiceImpl implements SiparisService {
 
     @Override
     public Siparis updateSiparis(SiparisRequest siparis, Long id) {
-        return null;
+        Optional<Siparis> optionalSiparis = siparisRepository.findById(id);
+        Siparis updatedSiparis = unwrapSiparis(optionalSiparis, id);
+
+        updatedSiparis.setEn(siparis.getEn());
+        updatedSiparis.setBoy(siparis.getBoy());
+        updatedSiparis.setSiparisNot(siparis.getSiparisNot());
+        updatedSiparis.setSiparisTarih(siparis.getSiparisTarih());
+        updatedSiparis.setCerceveler(cerceveRepository.findByCerceveKoduIn(siparis.getCerceveKodu()));
+        updatedSiparis.setCamlar(camRepository.findByCamKoduIn(siparis.getCamKodu()));
+        updatedSiparis.setPaspartular(paspartuRepository.findByPaspartuKoduIn(siparis.getPaspartuKodu()));
+        updatedSiparis.setAyna(aynaRepository.getAynaByAynaKodu(siparis.getAynaKodu()).get());
+        updatedSiparis.setMusteri(musteriRepository.findById(siparis.getMusteriId()).get());
+        return siparisRepository.save(updatedSiparis);
     }
 
     @Override
@@ -81,7 +93,9 @@ public class SiparisServiceImpl implements SiparisService {
 
     @Override
     public void deleteSiparis(Long id) {
-
+        Optional<Siparis> siparis = siparisRepository.findById(id);
+        Siparis deletedSiparis = unwrapSiparis(siparis, id);
+        siparisRepository.delete(deletedSiparis);
     }
 
     static Siparis unwrapSiparis(Optional<Siparis> entity, Long id) {

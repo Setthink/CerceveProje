@@ -37,4 +37,15 @@ public class SiparisController {
         return new ResponseEntity<>(siparisService.getAllSiparis(), HttpStatus.OK);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Siparis> updateSiparis(@PathVariable Long id, @Valid @RequestBody SiparisRequest siparis){
+        return new ResponseEntity<>(siparisService.updateSiparis(siparis,id), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSiparis(@PathVariable Long id){
+        siparisService.deleteSiparis(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }

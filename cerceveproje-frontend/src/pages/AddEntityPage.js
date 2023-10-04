@@ -80,7 +80,6 @@ const AddEntityPage = () => {
             type={column.type} // This sets the input type based on the column type
             value={formData[column.field]}
             onChange={handleChange}
-            //Just change the placeholder for date field
             placeholder={column.type === "date" ? "yyyy-mm-dd" : ""}
             fullWidth
             required
