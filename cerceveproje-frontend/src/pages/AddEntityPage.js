@@ -37,6 +37,17 @@ const AddEntityPage = () => {
     }));
   };
 
+  const calculateAndSetSiparisFiyat = () => {
+    // Your calculation logic here
+    const calculatedFiyat = parseFloat(formData.en) * parseFloat(formData.boy) * 10; // Replace with your actual calculation
+
+    // Set the calculated value to formData
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      siparisFiyat: calculatedFiyat.toFixed(2), // Assuming you want to round to 2 decimal places
+    }));
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
   
@@ -84,6 +95,8 @@ const AddEntityPage = () => {
             fullWidth
             required
             sx={{ my: 2 }} // Add spacing between fields
+            readOnly={column.field === "siparisFiyat"}
+            onBlur={calculateAndSetSiparisFiyat}
           />
         );
       }

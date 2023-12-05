@@ -56,6 +56,7 @@ public class SiparisServiceImpl implements SiparisService {
                 siparis1.setMusteri(musteriRepository.findById(siparis.getMusteriId()).get());
                 siparis1.setSiparisNot(siparis.getSiparisNot());
                 siparis1.setSiparisTarih(siparis.getSiparisTarih());
+                siparis1.setSiparisFiyat(calculateSiparisFiyat(siparis1));
                 return siparisRepository.save(siparis1);
 
             }catch (Exception e){
@@ -84,6 +85,10 @@ public class SiparisServiceImpl implements SiparisService {
         updatedSiparis.setAyna(aynaRepository.getAynaByAynaKodu(siparis.getAynaKodu()).get());
         updatedSiparis.setMusteri(musteriRepository.findById(siparis.getMusteriId()).get());
         return siparisRepository.save(updatedSiparis);
+    }
+
+    public float calculateSiparisFiyat(Siparis siparis) {
+        return siparis.getEn() * siparis.getBoy() * 10;
     }
 
     @Override
