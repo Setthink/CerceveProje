@@ -39,4 +39,7 @@ public class SiparisRequest {
     @NonNull
     private LocalDate siparisTarih;
 
+    private float siparisFiyat;
+
+
 }
