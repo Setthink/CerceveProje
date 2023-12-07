@@ -52,7 +52,6 @@ const AddEntityPage = () => {
   };
 
  const handleCalculateSiparisFiyat = () => {
-  // ... (your existing code)
   const cerceveKoduField = entityColumns[entityType].find((column) => column.field === "cerceveKodu");
   const enField = entityColumns[entityType].find((column) => column.field === "en");
   const boyField = entityColumns[entityType].find((column) => column.field === "boy");
