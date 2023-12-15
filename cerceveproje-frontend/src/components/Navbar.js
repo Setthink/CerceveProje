@@ -77,7 +77,9 @@ const Navbar = () => {
           open={Boolean(siparisAnchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose} component={Link} to={"/add/Siparis"}>Siparis Ekle</MenuItem>
+          <MenuItem onClick={handleClose} component={Link} to={"/add/Siparis"}>
+            Siparis Ekle
+          </MenuItem>
           <MenuItem onClick={handleClose} component={Link} to={"/Siparis"}>
             Tüm Siparisler
           </MenuItem>
@@ -92,7 +94,9 @@ const Navbar = () => {
           open={Boolean(musteriAnchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose} component={Link} to={"/add/Musteri"}>Müşteri Ekle</MenuItem>
+          <MenuItem onClick={handleClose} component={Link} to={"/add/Musteri"}>
+            Müşteri Ekle
+          </MenuItem>
           <MenuItem onClick={handleClose} component={Link} to={"/Musteri"}>
             Tüm Müşteriler
           </MenuItem>
@@ -107,7 +111,9 @@ const Navbar = () => {
           open={Boolean(cerceveAnchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose} component={Link} to={"/add/Cerceve"}>Cerceve Ekle</MenuItem>
+          <MenuItem onClick={handleClose} component={Link} to={"/add/Cerceve"}>
+            Cerceve Ekle
+          </MenuItem>
           <MenuItem onClick={handleClose} component={Link} to={"/Cerceve"}>
             Tüm Cerceveler
           </MenuItem>
@@ -122,7 +128,9 @@ const Navbar = () => {
           open={Boolean(camAnchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose} component={Link} to={"/add/Cam"}>Cam Ekle</MenuItem>
+          <MenuItem onClick={handleClose} component={Link} to={"/add/Cam"}>
+            Cam Ekle
+          </MenuItem>
           <MenuItem onClick={handleClose} component={Link} to={"/Cam"}>
             Tüm Camlar
           </MenuItem>
@@ -137,7 +145,9 @@ const Navbar = () => {
           open={Boolean(paspartuAnchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose} component={Link} to={"/add/Paspartu"}>Paspartu Ekle</MenuItem>
+          <MenuItem onClick={handleClose} component={Link} to={"/add/Paspartu"}>
+            Paspartu Ekle
+          </MenuItem>
           <MenuItem onClick={handleClose} component={Link} to={"/Paspartu"}>
             Tüm Paspartular
           </MenuItem>
@@ -152,7 +162,9 @@ const Navbar = () => {
           open={Boolean(aynaAnchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose} component={Link} to={"/add/Ayna"}>Ayna Ekle</MenuItem>
+          <MenuItem onClick={handleClose} component={Link} to={"/add/Ayna"}>
+            Ayna Ekle
+          </MenuItem>
           <MenuItem onClick={handleClose} component={Link} to={"/Ayna"}>
             Tüm Aynalar
           </MenuItem>

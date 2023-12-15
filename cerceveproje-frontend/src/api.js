@@ -14,7 +14,6 @@ class ApiService {
   putEntityData(entityType, id, data) {
     return axios.put(`${API_URL}${entityType.toLowerCase()}/${id}`, data);
   }
-  
 
   deleteEntityData(entityType, id) {
     return axios.delete(API_URL + entityType.toLowerCase() + "/" + id);

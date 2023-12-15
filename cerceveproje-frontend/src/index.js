@@ -1,6 +1,6 @@
 import React from "react";
 import App from "./App";
-import { createRoot } from 'react-dom/client';
+import { createRoot } from "react-dom/client";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AddEntityPage from "./pages/AddEntityPage";
@@ -16,9 +16,7 @@ const theme = createTheme({
   },
 });
 
-
-
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById("root");
 
 createRoot(rootElement).render(
   <React.StrictMode>

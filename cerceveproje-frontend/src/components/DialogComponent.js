@@ -1,5 +1,11 @@
 import React from "react";
-import { Dialog, DialogActions, DialogContent, DialogContentText, Button } from "@mui/material";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  Button,
+} from "@mui/material";
 
 const ConfirmationDialog = ({ isOpen, onClose, onConfirm }) => {
   return (
@@ -13,7 +19,7 @@ const ConfirmationDialog = ({ isOpen, onClose, onConfirm }) => {
         <Button onClick={onClose} color="primary">
           İptal Et
         </Button>
-        <Button onClick={onConfirm} color="error" >
+        <Button onClick={onConfirm} color="error">
           SİL
         </Button>
       </DialogActions>

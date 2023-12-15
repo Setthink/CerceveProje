@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from "react";
 import EditForm from "../components/EditForm";
-import { useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ApiService from "../api";
-import DataTable from "../components/DataTable/DataTable"; 
-import Layout from "../components/Layout"; 
-import { aynaCol, camCol, cerceveCol, musteriCol, paspartuCol, siparisCol } from "../components/constants";
-import { toast, ToastContainer,Flip } from "react-toastify";
+import DataTable from "../components/DataTable/DataTable";
+import Layout from "../components/Layout";
+import { entityColumns } from "../components/constants";
+import { toast, ToastContainer, Flip } from "react-toastify";
 import ConfirmationDialog from "../components/DialogComponent";
-const entityColumns = {
-  Ayna: aynaCol,
-  Cam: camCol,
-  Cerceve: cerceveCol,
-  Musteri: musteriCol,
-  Paspartu: paspartuCol,
-  Siparis: siparisCol,
-};
 
 const EntityPage = () => {
   const { entityType } = useParams();
@@ -58,13 +50,11 @@ const EntityPage = () => {
       }
       return row;
     });
-  
+
     setEntityData(updatedEntityData);
   };
-  
 
   const handleDeleteEntity = (row) => {
-    console.log(`Delete ${entityType} ID: ${row.id}`);
     setSelectedRow(row);
     setIsConfirmationOpen(true);
   };
@@ -79,7 +69,7 @@ const EntityPage = () => {
       }));
       setSiparisData(siparisDataWithDate);
     } catch (error) {
-      console.error('Error fetching siparis data:', error);
+      console.error("Error fetching siparis data:", error);
     }
   };
 
@@ -96,38 +86,40 @@ const EntityPage = () => {
       }));
       setEntityData(dataWithDate);
     } catch (error) {
-      toast.error(`Error deleting ${entityType} ID ${row.id}: ${error.message}`);
+      toast.error(
+        `Error deleting ${entityType} ID ${row.id}: ${error.message}`
+      );
     }
   };
 
   return (
     <Layout>
-      <ToastContainer 
+      <ToastContainer
         autoClose={1500}
         pauseOnFocusLoss={false}
         pauseOnHover={false}
         draggable={false}
         transition={Flip}
-        />
+      />
       <div>
-      {entityData && (
-        <DataTable
-          rows={entityData}
-          columns={entityColumns[entityType]}
-          onEdit={handleEditEntity}
-          onDelete={handleDeleteEntity}
-          onSiparisler={handleSiparislerEntity}
-        />
-      )}
-      {entityType === "Musteri" && siparisData && (
-        <DataTable
-          rows={siparisData}
-          columns={siparisCol}
-          onEdit={(row) => handleEditEntity(row)}
-          onDelete={(row) => handleDeleteEntity(row)} // Update the onDelete handler for siparis rows
-        />
-      )}
-      {isEditFormOpen && (
+        {entityData && (
+          <DataTable
+            rows={entityData}
+            columns={entityColumns[entityType]}
+            onEdit={handleEditEntity}
+            onDelete={handleDeleteEntity}
+            onSiparisler={handleSiparislerEntity}
+          />
+        )}
+        {entityType === "Musteri" && siparisData && (
+          <DataTable
+            rows={siparisData}
+            columns={entityColumns.siparisCol}
+            onEdit={(row) => handleEditEntity(row)}
+            onDelete={(row) => handleDeleteEntity(row)} // Update the onDelete handler for siparis rows
+          />
+        )}
+        {isEditFormOpen && (
           <EditForm
             isOpen={isEditFormOpen}
             onClose={() => setEditFormOpen(false)}
