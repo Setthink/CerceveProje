@@ -235,4 +235,4 @@ const entityColumnsPost = {
   Siparis: siparisColPost,
 };
 
-export { entityColumns, entityColumnsPost };
+export { entityColumns, entityColumnsPost, siparisCol};

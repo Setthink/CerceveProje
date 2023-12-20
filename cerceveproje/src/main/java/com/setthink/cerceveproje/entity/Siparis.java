@@ -25,6 +25,7 @@ public class Siparis {
     private float en;
 
     @Column(name = "boy", nullable = false)
+    @NonNull
     @Min(value = 0, message = "Boy 0'dan küçük olamaz")
     private float boy;
 

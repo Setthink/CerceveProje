@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import ApiService from "../api";
 import DataTable from "../components/DataTable/DataTable";
 import Layout from "../components/Layout";
-import { entityColumns } from "../components/constants";
+import { entityColumns, siparisCol } from "../components/Constants";
 import { toast, ToastContainer, Flip } from "react-toastify";
 import ConfirmationDialog from "../components/DialogComponent";
 
@@ -40,10 +40,6 @@ const EntityPage = () => {
   };
 
   const handleSaveEditedData = (editedData) => {
-    // Implement logic to save the edited data, e.g., update your data source
-    // You can use the 'editedData' and 'selectedRowData' to identify the row to update
-    // After saving, update your data source and state accordingly
-    // For example:
     const updatedEntityData = entityData.map((row) => {
       if (row.id === selectedRowData.id) {
         return { ...row, ...editedData };
@@ -77,8 +73,6 @@ const EntityPage = () => {
     try {
       await ApiService.deleteEntityData(entityType, row.id);
       toast.error(`${entityType} ID ${row.id} has been deleted.`);
-      // Refresh the entity list after deletion
-      // You can modify this logic based on your application's behavior
       const res = await ApiService.getEntityData(entityType);
       const dataWithDate = res.data.map((item) => ({
         ...item,
@@ -114,7 +108,7 @@ const EntityPage = () => {
         {entityType === "Musteri" && siparisData && (
           <DataTable
             rows={siparisData}
-            columns={entityColumns.siparisCol}
+            columns={siparisCol}
             onEdit={(row) => handleEditEntity(row)}
             onDelete={(row) => handleDeleteEntity(row)} // Update the onDelete handler for siparis rows
           />

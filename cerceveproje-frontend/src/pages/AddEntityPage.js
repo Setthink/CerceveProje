@@ -4,7 +4,7 @@ import { toast, ToastContainer, Flip } from "react-toastify";
 import ApiService from "../api";
 import Layout from "../components/Layout";
 import { useParams } from "react-router-dom";
-import { entityColumnsPost as entityColumns } from "../components/constants";
+import { entityColumnsPost as entityColumns } from "../components/Constants";
 import CalculateSiparisFiyat from "../components/CalculateFiyat";
 
 const AddEntityPage = () => {
