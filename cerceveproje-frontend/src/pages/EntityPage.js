@@ -98,20 +98,22 @@ const EntityPage = () => {
       <div>
         {entityData && (
           <DataTable
-            rows={entityData}
-            columns={entityColumns[entityType]}
-            onEdit={handleEditEntity}
-            onDelete={handleDeleteEntity}
-            onSiparisler={handleSiparislerEntity}
-          />
+          rows={entityData}
+          columns={entityColumns[entityType]}
+          onEdit={handleEditEntity}
+          onDelete={handleDeleteEntity}
+          onSiparisler={handleSiparislerEntity}
+          entityType={entityType}
+        />
         )}
         {entityType === "Musteri" && siparisData && (
           <DataTable
-            rows={siparisData}
-            columns={siparisCol}
-            onEdit={(row) => handleEditEntity(row)}
-            onDelete={(row) => handleDeleteEntity(row)} // Update the onDelete handler for siparis rows
-          />
+          rows={siparisData}
+          columns={siparisCol}
+          onEdit={(row) => handleEditEntity(row)}
+          onDelete={(row) => handleDeleteEntity(row)} 
+          entityType={entityType} 
+        />
         )}
         {isEditFormOpen && (
           <EditForm
