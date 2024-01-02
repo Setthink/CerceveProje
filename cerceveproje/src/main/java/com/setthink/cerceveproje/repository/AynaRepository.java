@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface AynaRepository extends CrudRepository<Ayna, Long> {
     Optional<Ayna> getAynaByAynaKodu(String aynaKodu);
+
 }

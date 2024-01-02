@@ -7,10 +7,13 @@ import java.util.List;
 
 public interface SiparisService {
     Siparis getSiparis(Long id);
+
     Siparis saveSiparis(SiparisRequest SiparisRequest);
 
-     List<Siparis> getAllSiparis();
+    List<Siparis> getAllSiparis();
+
     List<Siparis> getSiparisByMusteriId(Long musteriId);
+    
     Siparis updateSiparis(SiparisRequest SiparisRequest, Long id);
 
     void deleteSiparis(Long id);

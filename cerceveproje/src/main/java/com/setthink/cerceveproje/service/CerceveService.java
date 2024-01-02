@@ -8,7 +8,9 @@ public interface CerceveService {
     Cerceve getCerceve(Long id);
 
     Cerceve saveCerceve(Cerceve cerceve);
+
     void deleteCerceve(Long id);
+    
     Cerceve updateCerceve(Cerceve cerceve, Long id);
 
     List<Cerceve> getAllCerceve();
