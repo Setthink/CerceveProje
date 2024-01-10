@@ -34,14 +34,15 @@ public class SiparisServiceImpl implements SiparisService {
         List<Cerceve> cerceve = cerceveRepository.findByCerceveKoduIn(siparis.getCerceveKodu());
         List<Cam> cam = camRepository.findByCamKoduIn(siparis.getCamKodu());
         List<Paspartu> paspartu = paspartuRepository.findByPaspartuKoduIn(siparis.getPaspartuKodu());
+        List<Ayna> ayna = aynaRepository.findByAynaKoduIn(siparis.getAynaKodu());
         if(cerceve.size() != siparis.getCerceveKodu().size())
             throw new CerceveNotFoundException(siparis.getCerceveKodu().toString());
         else if(cam.size() != siparis.getCamKodu().size())
             throw new CamNotFoundException(siparis.getCamKodu().toString());
         else if(paspartu.size() != siparis.getPaspartuKodu().size())
             throw new PaspartuNotFoundException(siparis.getPaspartuKodu().toString());
-        else if(aynaRepository.getAynaByAynaKodu(siparis.getAynaKodu()).isEmpty())
-            throw new AynaNotFoundException(siparis.getAynaKodu());
+        else if(ayna.size() != siparis.getAynaKodu().size())
+            throw new AynaNotFoundException(siparis.getAynaKodu().toString());
         else if(musteriRepository.findById(siparis.getMusteriId()).isEmpty())
             throw new MusteriNotFoundException(siparis.getMusteriId());
         else {
@@ -52,7 +53,7 @@ public class SiparisServiceImpl implements SiparisService {
                 siparis1.setCerceveler(cerceve);
                 siparis1.setCamlar(cam);
                 siparis1.setPaspartular(paspartu);
-                siparis1.setAyna(aynaRepository.getAynaByAynaKodu(siparis.getAynaKodu()).get());
+                siparis1.setAynalar(ayna);
                 siparis1.setMusteri(musteriRepository.findById(siparis.getMusteriId()).get());
                 siparis1.setSiparisNot(siparis.getSiparisNot());
                 siparis1.setSiparisTarih(siparis.getSiparisTarih());
@@ -82,7 +83,7 @@ public class SiparisServiceImpl implements SiparisService {
         updatedSiparis.setCerceveler(cerceveRepository.findByCerceveKoduIn(siparis.getCerceveKodu()));
         updatedSiparis.setCamlar(camRepository.findByCamKoduIn(siparis.getCamKodu()));
         updatedSiparis.setPaspartular(paspartuRepository.findByPaspartuKoduIn(siparis.getPaspartuKodu()));
-        updatedSiparis.setAyna(aynaRepository.getAynaByAynaKodu(siparis.getAynaKodu()).get());
+        //updatedSiparis.setAyna(aynaRepository.getAynaByAynaKodu(siparis.getAynaKodu()).get());
         updatedSiparis.setMusteri(musteriRepository.findById(siparis.getMusteriId()).get());
         return siparisRepository.save(updatedSiparis);
     }

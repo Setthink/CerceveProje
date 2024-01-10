@@ -65,14 +65,14 @@ const EntityPage = () => {
       }));
       setSiparisData(siparisDataWithDate);
     } catch (error) {
-      console.error("Error fetching siparis data:", error);
+      console.error("Siparis verileri alınamadı", error);
     }
   };
 
   const handleConfirmDelete = async (row) => {
     try {
       await ApiService.deleteEntityData(entityType, row.id);
-      toast.error(`${entityType} ID ${row.id} has been deleted.`);
+      toast.error(`${entityType} ID ${row.id} silindi.`);
       const res = await ApiService.getEntityData(entityType);
       const dataWithDate = res.data.map((item) => ({
         ...item,
@@ -81,7 +81,7 @@ const EntityPage = () => {
       setEntityData(dataWithDate);
     } catch (error) {
       toast.error(
-        `Error deleting ${entityType} ID ${row.id}: ${error.message}`
+        ` ID'si  ${row.id} olan ${entityType} silinirken hata oluştu : ${error.message}`
       );
     }
   };

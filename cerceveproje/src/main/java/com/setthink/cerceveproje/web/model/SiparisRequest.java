@@ -29,13 +29,12 @@ public class SiparisRequest {
 
     private List<String> paspartuKodu;
 
-    private String aynaKodu;
+    private List<String> aynaKodu;
 
     private Long musteriId;
 
     private String siparisNot;
 
-    @Past(message = "Geçmiş tarih seçiniz")
     @NonNull
     private LocalDate siparisTarih;
 

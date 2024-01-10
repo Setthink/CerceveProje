@@ -28,8 +28,12 @@ public class Ayna {
     @Min(value = 0, message = "Ayna fiyatı 0'dan küçük olamaz")
     private float aynaFiyat;
 
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE,
+            },mappedBy = "aynalar")
     @JsonIgnore
-    @OneToMany(mappedBy = "ayna", cascade = CascadeType.ALL)
     private List<Siparis> Siparisler;
 
 }

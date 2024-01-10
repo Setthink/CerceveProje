@@ -60,9 +60,15 @@ public class Siparis {
             inverseJoinColumns = { @JoinColumn(name = "paspartu_id") })
     private List<Paspartu> paspartular;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "ayna_id", nullable = false)
-    private Ayna ayna;
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "siparis_ayna",
+            joinColumns = { @JoinColumn(name = "siparis_id") },
+            inverseJoinColumns = { @JoinColumn(name = "ayna_id") })
+    private List<Ayna> aynalar;
 
 
 
@@ -73,7 +79,6 @@ public class Siparis {
     @Column(name = "siparis_not")
     private String siparisNot;
 
-    @Past(message = "Geçmiş tarih seçiniz")
     @NonNull
     @Column(name = "siparis_tarih", nullable = false)
     private LocalDate siparisTarih;

@@ -136,11 +136,12 @@ const siparisCol = [
     },
   },
   {
-    field: "ayna",
+    field: "aynalar",
     headerName: "Ayna",
+    type: "string[]",
     width: 100,
     valueGetter: (params) => {
-      return params.row.ayna ? params.row.ayna.aynaKodu : "";
+      return params.row.aynalar?.map((ayna) => ayna.aynaKodu).join(", ") || "";
     },
   },
   {
@@ -193,6 +194,7 @@ const siparisColPost = [
   {
     field: "aynaKodu",
     headerName: "Ayna",
+    type: "string[]",
     width: 100,
   },
   {

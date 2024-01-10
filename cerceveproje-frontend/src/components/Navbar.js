@@ -62,7 +62,6 @@ const Navbar = () => {
           sx={{ mr: 2 }}
           startIcon={<HomeIcon />}
         >
-          Anasayfa
         </Button>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Elif Çerçeve
