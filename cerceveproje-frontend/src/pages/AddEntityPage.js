@@ -37,19 +37,25 @@ const AddEntityPage = () => {
     event.preventDefault();
 
     const entityData = entityColumns[entityType].reduce((entity, column) => {
-      if (column.field !== "id" && formData[column.field] !== undefined && formData[column.field] !== null) {
+      if (
+        column.field !== "id" &&
+        formData[column.field] !== undefined &&
+        formData[column.field] !== null
+      ) {
         if (column.field === "siparisFiyat") {
           entity[column.field] = siparisFiyat;
         } else if (column.type === "number") {
           entity[column.field] = parseFloat(formData[column.field]);
-        } else if (column.type === "string[]" && formData[column.field] === "") {
+        } else if (
+          column.type === "string[]" &&
+          formData[column.field] === ""
+        ) {
           entity[column.field] = [];
         } else if (column.type === "string[]") {
           entity[column.field] = formData[column.field]
             .replace(/\s/g, "")
             .split(",");
-        } 
-        else {
+        } else {
           entity[column.field] = formData[column.field];
         }
       }
@@ -80,7 +86,9 @@ const AddEntityPage = () => {
             label={column.headerName}
             name={column.field}
             type={column.type}
-            value={formData[column.field] || (column.type === "string[]" ? "" : [])}
+            value={
+              formData[column.field] || (column.type === "string[]" ? "" : [])
+            }
             onChange={handleChange}
             placeholder={column.type === "date" ? "yyyy-mm-dd" : ""}
             fullWidth
@@ -89,9 +97,7 @@ const AddEntityPage = () => {
             disabled={column.field === "siparisFiyat"}
             InputProps={
               isSiparisFiyat && {
-                startAdornment: (
-                  <div style={{ marginRight: "5px"}}>₺</div>
-                ),
+                startAdornment: <div style={{ marginRight: "5px" }}>₺</div>,
               }
             }
           />
@@ -105,7 +111,6 @@ const AddEntityPage = () => {
     window.location.href = `/${entityType}`;
   };
 
-  
   if (!entityColumns[entityType]) {
     return (
       <Container maxWidth="sm">
@@ -132,9 +137,9 @@ const AddEntityPage = () => {
             color="primary"
             sx={{ marginRight: 3 }}
           >
-            Add {entityType} 
+            Add {entityType}
           </Button>
-          
+
           {entityType === "Siparis" && (
             <CalculateSiparisFiyat
               entityType={entityType}
