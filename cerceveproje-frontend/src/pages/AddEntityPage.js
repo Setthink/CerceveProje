@@ -73,6 +73,7 @@ const AddEntityPage = () => {
     return entityColumns[entityType].map((column) => {
       if (column.field !== "id") {
         const isSiparis = entityType === "Siparis";
+        const isSiparisFiyat = column.field === "siparisFiyat";
         return (
           <TextField
             key={column.field}
@@ -86,6 +87,13 @@ const AddEntityPage = () => {
             required={!isSiparis}
             sx={{ my: 2 }}
             disabled={column.field === "siparisFiyat"}
+            InputProps={
+              isSiparisFiyat && {
+                startAdornment: (
+                  <div style={{ marginRight: "5px"}}>₺</div>
+                ),
+              }
+            }
           />
         );
       }
@@ -93,10 +101,11 @@ const AddEntityPage = () => {
     });
   };
 
-  /* const navigateToEntityList = () => {
+  const navigateToEntityList = () => {
     window.location.href = `/${entityType}`;
   };
- */
+
+  
   if (!entityColumns[entityType]) {
     return (
       <Container maxWidth="sm">
