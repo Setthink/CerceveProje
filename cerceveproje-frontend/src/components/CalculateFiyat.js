@@ -116,8 +116,8 @@ const CalculateSiparisFiyat = ({
               selectedCerceve.cerceveKodu === cerceveKoduValues[1]
             ) {
               const cerceveFiyat =
-              ((en + firstCerceveGenislik * 2) +
-              (boy + firstCerceveGenislik * 2)) *
+              (((en + firstCerceveGenislik) * 2) +
+              ((boy + firstCerceveGenislik) * 2)) *
               2 * (selectedCerceve.cerceveFiyat/100);
               return totalFiyat + cerceveFiyat;
             }
