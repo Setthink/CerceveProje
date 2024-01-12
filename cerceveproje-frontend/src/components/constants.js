@@ -40,6 +40,9 @@ const cerceveCol = [
     headerAlign: "left",
     type: "number",
     width: 250,
+    renderCell: (params) => {
+      return params.value ? `${params.value} m` : null;
+    },
   },
   {
     field: "cerceveGenislik",
@@ -167,14 +170,14 @@ const siparisCol = [
     type: "number",
     width: 150,
     renderCell: (params) => {
-      return (
+      return params.value ? (
         <strong>
           {params.value.toLocaleString("tr-TR", {
             style: "currency",
             currency: "TRY",
           })}
         </strong>
-      );
+      ) : null;
     },
   },
 ];

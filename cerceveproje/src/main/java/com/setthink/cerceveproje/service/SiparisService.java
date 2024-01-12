@@ -13,7 +13,7 @@ public interface SiparisService {
     List<Siparis> getAllSiparis();
 
     List<Siparis> getSiparisByMusteriId(Long musteriId);
-    
+
     Siparis updateSiparis(SiparisRequest SiparisRequest, Long id);
 
     void deleteSiparis(Long id);

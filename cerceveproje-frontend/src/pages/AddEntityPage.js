@@ -68,10 +68,10 @@ const AddEntityPage = () => {
         theme: "colored",
       });
       setTimeout(() => {
-        //navigateToEntityList();
+        navigateToEntityList();
       }, 1500);
     } catch (error) {
-      toast.error(error.message);
+      toast.error(`${error.response.data.message}`);
     }
   };
 
@@ -96,9 +96,10 @@ const AddEntityPage = () => {
             sx={{ my: 2 }}
             disabled={column.field === "siparisFiyat"}
             InputProps={
-              isSiparisFiyat && {
-                startAdornment: <div style={{ marginRight: "5px" }}>₺</div>,
-              }
+              {readOnly: true} &&
+                isSiparisFiyat && {
+                  startAdornment: <div style={{ marginRight: "5px" }}>₺</div>,
+                }
             }
           />
         );

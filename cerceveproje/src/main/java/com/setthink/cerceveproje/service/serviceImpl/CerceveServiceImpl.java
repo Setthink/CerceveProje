@@ -1,7 +1,7 @@
 package com.setthink.cerceveproje.service.serviceImpl;
 
 import com.setthink.cerceveproje.entity.Cerceve;
-import com.setthink.cerceveproje.exception.CerceveNotFoundException;
+import com.setthink.cerceveproje.exception.notFound.CerceveNotFoundException;
 import com.setthink.cerceveproje.repository.CerceveRepository;
 import com.setthink.cerceveproje.service.CerceveService;
 import lombok.AllArgsConstructor;
@@ -50,20 +50,18 @@ public class CerceveServiceImpl implements CerceveService {
         return (List<Cerceve>) cerceveRepository.findAll();
     }
 
-    static Cerceve unwrapCerceve(Optional<Cerceve> entity, Long id){
-        if (entity.isPresent()){
+    static Cerceve unwrapCerceve(Optional<Cerceve> entity, Long id) {
+        if (entity.isPresent()) {
             return entity.get();
-        }
-        else {
+        } else {
             throw new CerceveNotFoundException(id);
         }
     }
 
-    static Cerceve unwrapCerceve(Optional<Cerceve> entity, String cerceveKodu){
-        if (entity.isPresent()){
+    static Cerceve unwrapCerceve(Optional<Cerceve> entity, String cerceveKodu) {
+        if (entity.isPresent()) {
             return entity.get();
-        }
-        else {
+        } else {
             throw new CerceveNotFoundException(cerceveKodu);
         }
     }

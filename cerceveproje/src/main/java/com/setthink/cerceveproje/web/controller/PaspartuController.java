@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/paspartu")
 public class PaspartuController {
+
     PaspartuService paspartuService;
 
     @GetMapping("/{id}")
@@ -41,4 +42,5 @@ public class PaspartuController {
     public ResponseEntity<Paspartu> updatePaspartu(@PathVariable Long id, @Valid @RequestBody Paspartu paspartu) {
         return new ResponseEntity<>(paspartuService.updatePaspartu(paspartu, id), HttpStatus.OK);
     }
+
 }

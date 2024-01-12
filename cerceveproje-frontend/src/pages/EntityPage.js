@@ -81,7 +81,7 @@ const EntityPage = () => {
       setEntityData(dataWithDate);
     } catch (error) {
       toast.error(
-        ` ID'si  ${row.id} olan ${entityType} silinirken hata oluştu : ${error.message}`
+        ` ID'si  ${row.id} olan ${entityType} silinirken hata oluştu : ${`${error.response.data.message}`}`
       );
     }
   };

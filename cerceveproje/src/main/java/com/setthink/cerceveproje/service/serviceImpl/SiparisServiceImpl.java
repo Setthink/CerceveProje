@@ -2,6 +2,7 @@ package com.setthink.cerceveproje.service.serviceImpl;
 
 import com.setthink.cerceveproje.entity.*;
 import com.setthink.cerceveproje.exception.*;
+import com.setthink.cerceveproje.exception.notFound.*;
 import com.setthink.cerceveproje.repository.*;
 import com.setthink.cerceveproje.service.SiparisService;
 import com.setthink.cerceveproje.web.model.SiparisRequest;
@@ -35,23 +36,23 @@ public class SiparisServiceImpl implements SiparisService {
         List<Cam> cam = camRepository.findByCamKoduIn(siparis.getCamKodu());
         List<Paspartu> paspartu = paspartuRepository.findByPaspartuKoduIn(siparis.getPaspartuKodu());
         List<Ayna> ayna = aynaRepository.findByAynaKoduIn(siparis.getAynaKodu());
-        if(cerceve.size() != siparis.getCerceveKodu().size())
+        if (cerceve.size() != siparis.getCerceveKodu().size())
             throw new CerceveNotFoundException(siparis.getCerceveKodu().toString());
-        else if(cam.size() != siparis.getCamKodu().size())
+        else if (cam.size() != siparis.getCamKodu().size())
             throw new CamNotFoundException(siparis.getCamKodu().toString());
-        else if(paspartu.size() != siparis.getPaspartuKodu().size())
+        else if (paspartu.size() != siparis.getPaspartuKodu().size())
             throw new PaspartuNotFoundException(siparis.getPaspartuKodu().toString());
-        else if(ayna.size() != siparis.getAynaKodu().size())
+        else if (ayna.size() != siparis.getAynaKodu().size())
             throw new AynaNotFoundException(siparis.getAynaKodu().toString());
-        else if(musteriRepository.findById(siparis.getMusteriId()).isEmpty())
+        else if (musteriRepository.findById(siparis.getMusteriId()).isEmpty())
             throw new MusteriNotFoundException(siparis.getMusteriId());
         else {
             Siparis siparis1 = new Siparis();
-            try{
+            try {
                 siparis1.setBoy(siparis.getBoy());
                 siparis1.setEn(siparis.getEn());
-                calculateCerceveUsage(siparis);
                 siparis1.setCerceveler(cerceve);
+                calculateCerceveUsage(siparis);
                 siparis1.setCamlar(cam);
                 siparis1.setPaspartular(paspartu);
                 siparis1.setAynalar(ayna);
@@ -60,8 +61,10 @@ public class SiparisServiceImpl implements SiparisService {
                 siparis1.setSiparisTarih(siparis.getSiparisTarih());
                 siparis1.setSiparisFiyat(siparis.getSiparisFiyat());
                 return siparisRepository.save(siparis1);
-            }catch (Exception e){
-                throw new CerceveNotEnoughException(siparis.getCerceveKodu().toString());
+            } catch (CerceveNotEnoughException e) {
+                throw e;
+            } catch (Exception e) {
+                throw new SiparisNotSavedException();
             }
         }
     }
@@ -88,7 +91,6 @@ public class SiparisServiceImpl implements SiparisService {
         return siparisRepository.save(updatedSiparis);
     }
 
-
     @Override
     public List<Siparis> getSiparisByMusteriId(Long musteriId) {
         return siparisRepository.findByMusteriId(musteriId);
@@ -102,33 +104,34 @@ public class SiparisServiceImpl implements SiparisService {
     }
 
     static Siparis unwrapSiparis(Optional<Siparis> entity, Long id) {
-        if(entity.isPresent()) return entity.get();
+        if (entity.isPresent()) return entity.get();
         else throw new SiparisNotFoundException(id);
     }
 
-    public void calculateCerceveUsage(SiparisRequest siparis){
+    public void calculateCerceveUsage(SiparisRequest siparis) {
         List<Cerceve> cerceve = cerceveRepository.findByCerceveKoduIn(siparis.getCerceveKodu());
         Cerceve firstCerceve = cerceve.get(0);
         float En = siparis.getEn();
         float Boy = siparis.getBoy();
-        for(Cerceve foe : cerceve){
+        for (Cerceve foe : cerceve) {
             float cerceveUsage;
-            if(foe == firstCerceve) {
-                cerceveUsage = (En + foe.getCerceveGenislik()) * 2 + (Boy + foe.getCerceveGenislik()) * 2;
-                if (cerceveUsage > foe.getCerceveBoyutu())
-                    throw new CerceveNotEnoughException(siparis.getCerceveKodu().toString());
-                else{
+            if (foe == firstCerceve) {
+                cerceveUsage = ((En + foe.getCerceveGenislik()) * 2 + (Boy + foe.getCerceveGenislik()) * 2) / 100;
+                if (cerceveUsage > foe.getCerceveBoyutu()) {
+                    throw new CerceveNotEnoughException(foe.getCerceveKodu());
+                } else {
                     foe.setCerceveBoyutu(foe.getCerceveBoyutu() - cerceveUsage);
                 }
-            } else if (foe == cerceve.get(1)){
-                cerceveUsage = ((((En + foe.getCerceveGenislik()) * 2) + firstCerceve.getCerceveGenislik()) * 2) +
-                        ((((Boy + foe.getCerceveGenislik()) * 2) + firstCerceve.getCerceveGenislik()) * 2);
+            } else if (foe == cerceve.get(1)) {
+                cerceveUsage = (((((En + foe.getCerceveGenislik()) * 2) + firstCerceve.getCerceveGenislik()) * 2) +
+                        ((((Boy + foe.getCerceveGenislik()) * 2) + firstCerceve.getCerceveGenislik()) * 2)) / 100;
                 if (cerceveUsage > foe.getCerceveBoyutu())
-                    throw new CerceveNotEnoughException(siparis.getCerceveKodu().toString());
-                else{
+                    throw new CerceveNotEnoughException(foe.getCerceveKodu());
+                else {
                     foe.setCerceveBoyutu(foe.getCerceveBoyutu() - cerceveUsage);
                 }
             }
         }
     }
+
 }

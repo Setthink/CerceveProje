@@ -18,29 +18,29 @@ public class CerceveController {
     CerceveService cerceveService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cerceve> getCerceve(@PathVariable Long id){
+    public ResponseEntity<Cerceve> getCerceve(@PathVariable Long id) {
         return new ResponseEntity<>(cerceveService.getCerceve(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Cerceve> saveCerceve(@Valid @RequestBody Cerceve cerceve){
-        return new ResponseEntity<>(cerceveService.saveCerceve(cerceve),HttpStatus.CREATED);
+    public ResponseEntity<Cerceve> saveCerceve(@Valid @RequestBody Cerceve cerceve) {
+        return new ResponseEntity<>(cerceveService.saveCerceve(cerceve), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCerceve(@PathVariable Long id){
+    public ResponseEntity<Void> deleteCerceve(@PathVariable Long id) {
         cerceveService.deleteCerceve(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Cerceve>> getAllCerceve(){
+    public ResponseEntity<List<Cerceve>> getAllCerceve() {
         return new ResponseEntity<>(cerceveService.getAllCerceve(), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cerceve> updateCerceve(@PathVariable Long id, @Valid @RequestBody Cerceve cerceve){
-        return new ResponseEntity<>(cerceveService.updateCerceve(cerceve,id), HttpStatus.OK);
+    public ResponseEntity<Cerceve> updateCerceve(@PathVariable Long id, @Valid @RequestBody Cerceve cerceve) {
+        return new ResponseEntity<>(cerceveService.updateCerceve(cerceve, id), HttpStatus.OK);
     }
 
 }

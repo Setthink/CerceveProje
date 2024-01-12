@@ -8,4 +8,5 @@ import java.util.List;
 public interface PaspartuRepository extends CrudRepository<Paspartu, Long> {
 
     List<Paspartu> findByPaspartuKoduIn(List<String> ListPaspartuKod);
+
 }

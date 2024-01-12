@@ -15,35 +15,37 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/siparis")
 public class SiparisController {
+
     SiparisService siparisService;
+
     @GetMapping("/{id}")
-    public ResponseEntity<Siparis> getSiparis(@PathVariable Long id){
+    public ResponseEntity<Siparis> getSiparis(@PathVariable Long id) {
         return new ResponseEntity<>(siparisService.getSiparis(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Siparis> saveSiparis(@Valid @RequestBody SiparisRequest siparis){
-        return new ResponseEntity<>(siparisService.saveSiparis(siparis),HttpStatus.CREATED);
+    public ResponseEntity<Siparis> saveSiparis(@Valid @RequestBody SiparisRequest siparis) {
+        return new ResponseEntity<>(siparisService.saveSiparis(siparis), HttpStatus.CREATED);
     }
 
 
     @GetMapping("/musteri/{musteriId}")
-    public ResponseEntity<List<Siparis>> getSiparisByMusteriId(@PathVariable Long musteriId){
-        return new ResponseEntity<>(siparisService.getSiparisByMusteriId(musteriId),HttpStatus.OK);
+    public ResponseEntity<List<Siparis>> getSiparisByMusteriId(@PathVariable Long musteriId) {
+        return new ResponseEntity<>(siparisService.getSiparisByMusteriId(musteriId), HttpStatus.OK);
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Siparis>> getAllSiparis(){
+    public ResponseEntity<List<Siparis>> getAllSiparis() {
         return new ResponseEntity<>(siparisService.getAllSiparis(), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Siparis> updateSiparis(@PathVariable Long id, @Valid @RequestBody SiparisRequest siparis){
-        return new ResponseEntity<>(siparisService.updateSiparis(siparis,id), HttpStatus.OK);
+    public ResponseEntity<Siparis> updateSiparis(@PathVariable Long id, @Valid @RequestBody SiparisRequest siparis) {
+        return new ResponseEntity<>(siparisService.updateSiparis(siparis, id), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteSiparis(@PathVariable Long id){
+    public ResponseEntity<Void> deleteSiparis(@PathVariable Long id) {
         siparisService.deleteSiparis(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

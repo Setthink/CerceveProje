@@ -40,5 +40,4 @@ public class SiparisRequest {
 
     private float siparisFiyat;
 
-
 }

@@ -1,7 +1,7 @@
 package com.setthink.cerceveproje.service.serviceImpl;
 
 import com.setthink.cerceveproje.entity.Ayna;
-import com.setthink.cerceveproje.exception.AynaNotFoundException;
+import com.setthink.cerceveproje.exception.notFound.AynaNotFoundException;
 import com.setthink.cerceveproje.repository.AynaRepository;
 import com.setthink.cerceveproje.service.AynaService;
 import lombok.AllArgsConstructor;
@@ -13,6 +13,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @Service
 public class AynaServiceImpl implements AynaService {
+
     AynaRepository aynaRepository;
 
     @Override
@@ -47,7 +48,6 @@ public class AynaServiceImpl implements AynaService {
         return (List<Ayna>) aynaRepository.findAll();
     }
 
-
     static Ayna unwrapAyna(Optional<Ayna> entity, Long id) {
         if (entity.isPresent()) {
             return entity.get();
@@ -63,4 +63,5 @@ public class AynaServiceImpl implements AynaService {
             throw new AynaNotFoundException(aynaKodu);
         }
     }
+
 }

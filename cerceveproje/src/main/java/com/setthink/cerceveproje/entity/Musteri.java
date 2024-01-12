@@ -13,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "musteri")
 public class Musteri {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,7 +22,6 @@ public class Musteri {
     @NonNull
     @Column(name = "musteriadi", nullable = false)
     private String musteriAdi;
-
 
     @NotBlank(message = "Müşteri numarası boş olamaz")
     @NonNull

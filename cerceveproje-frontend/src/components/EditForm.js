@@ -81,7 +81,7 @@ const EditForm = ({ isOpen, onClose, onSave, initialData }) => {
         onClose();
       }, 1500);
     } catch (error) {
-      toast.error(error.message);
+      toast.error(`${error.response.data.message}`);
     }
   };
 

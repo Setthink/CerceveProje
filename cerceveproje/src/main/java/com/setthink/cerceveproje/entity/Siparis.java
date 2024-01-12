@@ -15,6 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "siparis")
 public class Siparis {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,8 +36,8 @@ public class Siparis {
                     CascadeType.MERGE
             })
     @JoinTable(name = "siparis_cerceve",
-            joinColumns = { @JoinColumn(name = "siparis_id") },
-            inverseJoinColumns = { @JoinColumn(name = "cerceve_id") })
+            joinColumns = {@JoinColumn(name = "siparis_id")},
+            inverseJoinColumns = {@JoinColumn(name = "cerceve_id")})
     private List<Cerceve> cerceveler;
 
     @ManyToMany(fetch = FetchType.LAZY,
@@ -45,10 +46,9 @@ public class Siparis {
                     CascadeType.MERGE
             })
     @JoinTable(name = "siparis_cam",
-            joinColumns = { @JoinColumn(name = "siparis_id") },
-            inverseJoinColumns = { @JoinColumn(name = "cam_id") })
+            joinColumns = {@JoinColumn(name = "siparis_id")},
+            inverseJoinColumns = {@JoinColumn(name = "cam_id")})
     private List<Cam> camlar;
-
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
@@ -56,8 +56,8 @@ public class Siparis {
                     CascadeType.MERGE
             })
     @JoinTable(name = "siparis_paspartu",
-            joinColumns = { @JoinColumn(name = "siparis_id") },
-            inverseJoinColumns = { @JoinColumn(name = "paspartu_id") })
+            joinColumns = {@JoinColumn(name = "siparis_id")},
+            inverseJoinColumns = {@JoinColumn(name = "paspartu_id")})
     private List<Paspartu> paspartular;
 
     @ManyToMany(fetch = FetchType.LAZY,
@@ -66,11 +66,9 @@ public class Siparis {
                     CascadeType.MERGE
             })
     @JoinTable(name = "siparis_ayna",
-            joinColumns = { @JoinColumn(name = "siparis_id") },
-            inverseJoinColumns = { @JoinColumn(name = "ayna_id") })
+            joinColumns = {@JoinColumn(name = "siparis_id")},
+            inverseJoinColumns = {@JoinColumn(name = "ayna_id")})
     private List<Ayna> aynalar;
-
-
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "musteri_id", nullable = false)

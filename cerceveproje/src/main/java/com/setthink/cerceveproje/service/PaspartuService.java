@@ -15,4 +15,5 @@ public interface PaspartuService {
     Paspartu updatePaspartu(Paspartu paspartu, Long id);
 
     List<Paspartu> getAllPaspartu();
+
 }

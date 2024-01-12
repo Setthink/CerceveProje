@@ -14,31 +14,33 @@ import java.util.List;
 @RestController
 @RequestMapping("/cam")
 public class CamController {
+
     CamService camService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cam> getCam(@PathVariable Long id){
+    public ResponseEntity<Cam> getCam(@PathVariable Long id) {
         return new ResponseEntity<>(camService.getCam(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Cam> saveCam(@Valid @RequestBody Cam cam){
-        return new ResponseEntity<>(camService.saveCam(cam),HttpStatus.CREATED);
+    public ResponseEntity<Cam> saveCam(@Valid @RequestBody Cam cam) {
+        return new ResponseEntity<>(camService.saveCam(cam), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCam(@PathVariable Long id){
+    public ResponseEntity<Void> deleteCam(@PathVariable Long id) {
         camService.deleteCam(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Cam>> getAllCam(){
+    public ResponseEntity<List<Cam>> getAllCam() {
         return new ResponseEntity<>(camService.getAllCam(), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cam> updateCam(@PathVariable Long id, @Valid @RequestBody Cam cam){
-        return new ResponseEntity<>(camService.updateCam(cam,id), HttpStatus.OK);
+    public ResponseEntity<Cam> updateCam(@PathVariable Long id, @Valid @RequestBody Cam cam) {
+        return new ResponseEntity<>(camService.updateCam(cam, id), HttpStatus.OK);
     }
+
 }

@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface AynaService {
 
-
     Ayna getAyna(Long id);
 
     Ayna saveAyna(Ayna ayna);

@@ -37,37 +37,37 @@ public class CerceveprojeApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         Cerceve[] cerceves = new Cerceve[]{
-                new Cerceve("abc",200f,15f,15f),
-                new Cerceve("def",200f,15f,15f),
-                new Cerceve("ghi",200f,15f,15f),
+                new Cerceve("abc", 200f, 15f, 15f),
+                new Cerceve("def", 200f, 20f, 50f),
+                new Cerceve("ghi", 200f, 30f, 150f),
         };
         cerceveRepository.saveAll(Arrays.asList(cerceves));
 
         Paspartu[] paspartus = new Paspartu[]{
-                new Paspartu("abc",15f),
-                new Paspartu("def",15f),
-                new Paspartu("ghi",15f),
+                new Paspartu("abc", 15f),
+                new Paspartu("def", 15f),
+                new Paspartu("ghi", 15f),
         };
         paspartuRepository.saveAll(Arrays.asList(paspartus));
 
         Cam[] cams = new Cam[]{
-                new Cam("abc","Mat",15f),
-                new Cam("def","Mat",15f),
-                new Cam("ghi","Düz",15f),
+                new Cam("abc", "Mat", 15f),
+                new Cam("def", "Mat", 15f),
+                new Cam("ghi", "Düz", 15f),
         };
         camRepository.saveAll(Arrays.asList(cams));
 
         Musteri[] musteris = new Musteri[]{
-                new Musteri("Mehmet","123456789"),
-                new Musteri("Ali","123456789"),
-                new Musteri("Veli","123456789"),
+                new Musteri("Mehmet", "123456789"),
+                new Musteri("Ali", "123456789"),
+                new Musteri("Veli", "123456789"),
         };
         musteriRepository.saveAll(Arrays.asList(musteris));
 
         Ayna[] aynas = new Ayna[]{
-                new Ayna("abc",15f),
-                new Ayna("def",15f),
-                new Ayna("ghi",15f)
+                new Ayna("abc", 15f),
+                new Ayna("def", 15f),
+                new Ayna("ghi", 15f)
         };
         aynaRepository.saveAll(Arrays.asList(aynas));
     }

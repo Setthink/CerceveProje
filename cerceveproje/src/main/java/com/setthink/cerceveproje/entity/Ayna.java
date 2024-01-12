@@ -14,6 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "ayna")
 public class Ayna {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,7 +33,7 @@ public class Ayna {
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE,
-            },mappedBy = "aynalar")
+            }, mappedBy = "aynalar")
     @JsonIgnore
     private List<Siparis> Siparisler;
 

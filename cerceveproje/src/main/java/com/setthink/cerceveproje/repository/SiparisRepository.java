@@ -9,4 +9,5 @@ import java.util.List;
 public interface SiparisRepository extends CrudRepository<Siparis, Long> {
 
     List<Siparis> findByMusteriId(Long musteriId);
+
 }

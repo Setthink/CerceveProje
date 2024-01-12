@@ -20,13 +20,10 @@ public class Paspartu {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @NotBlank(message = "Paspartu kodu boş olamaz")
     @NonNull
     @Column(name = "paspartukodu", nullable = false, unique = true)
     private String paspartuKodu;
-
-
 
     @Column(name = "paspartufiyat", nullable = false)
     @NonNull
@@ -37,7 +34,7 @@ public class Paspartu {
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
-            },mappedBy = "paspartular")
+            }, mappedBy = "paspartular")
     @JsonIgnore
     private List<Siparis> Siparisler;
 

@@ -14,31 +14,33 @@ import java.util.List;
 @RestController
 @RequestMapping("/ayna")
 public class AynaController {
+
     AynaService aynaService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Ayna> getAyna(@PathVariable Long id){
+    public ResponseEntity<Ayna> getAyna(@PathVariable Long id) {
         return new ResponseEntity<>(aynaService.getAyna(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Ayna> saveAyna(@Valid @RequestBody Ayna ayna){
-        return new ResponseEntity<>(aynaService.saveAyna(ayna),HttpStatus.CREATED);
+    public ResponseEntity<Ayna> saveAyna(@Valid @RequestBody Ayna ayna) {
+        return new ResponseEntity<>(aynaService.saveAyna(ayna), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAyna(@PathVariable Long id){
+    public ResponseEntity<Void> deleteAyna(@PathVariable Long id) {
         aynaService.deleteAyna(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Ayna>> getAllAyna(){
+    public ResponseEntity<List<Ayna>> getAllAyna() {
         return new ResponseEntity<>(aynaService.getAllAyna(), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Ayna> updateAyna(@PathVariable Long id, @Valid @RequestBody Ayna ayna){
-        return new ResponseEntity<>(aynaService.updateAyna(ayna,id), HttpStatus.OK);
+    public ResponseEntity<Ayna> updateAyna(@PathVariable Long id, @Valid @RequestBody Ayna ayna) {
+        return new ResponseEntity<>(aynaService.updateAyna(ayna, id), HttpStatus.OK);
     }
+
 }

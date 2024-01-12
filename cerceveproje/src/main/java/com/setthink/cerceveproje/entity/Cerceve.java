@@ -1,4 +1,5 @@
 package com.setthink.cerceveproje.entity;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
@@ -24,7 +25,6 @@ public class Cerceve {
     @Column(name = "cercevekodu", nullable = false, unique = true)
     private String cerceveKodu;
 
-
     @Column(name = "cerceveboyutu", nullable = false)
     @NonNull
     @Min(value = 0, message = "Cerceve boyutu 0'dan küçük olamaz")
@@ -40,13 +40,11 @@ public class Cerceve {
     @Min(value = 0, message = "Cerceve fiyatı 0'dan küçük olamaz")
     private float cerceveFiyat;
 
-
-
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE,
-            },mappedBy = "cerceveler")
+            }, mappedBy = "cerceveler")
     @JsonIgnore
     private List<Siparis> Siparisler;
 }

@@ -1,6 +1,8 @@
 package com.setthink.cerceveproje;
 
 import com.setthink.cerceveproje.exception.*;
+import com.setthink.cerceveproje.exception.notFound.CerceveNotEnoughException;
+import com.setthink.cerceveproje.exception.notFound.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
@@ -20,10 +22,16 @@ import java.util.List;
 @ControllerAdvice
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({CerceveNotFoundException.class, AynaNotFoundException.class, CamNotFoundException.class, MusteriNotFoundException.class, PaspartuNotFoundException.class, SiparisNotFoundException.class, CerceveNotEnoughException.class})
+    @ExceptionHandler({EntityNotFoundException.class})
     public ResponseEntity<Object> handleResourceNotFoundException(RuntimeException ex) {
         ErrorResponse error = new ErrorResponse(Arrays.asList(ex.getMessage()));
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({CerceveNotEnoughException.class, SiparisNotSavedException.class})
+    public ResponseEntity<Object> handleCerceveNotEnoughException(RuntimeException ex) {
+        ErrorResponse error = new ErrorResponse(Arrays.asList(ex.getMessage()));
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(EmptyResultDataAccessException.class)
