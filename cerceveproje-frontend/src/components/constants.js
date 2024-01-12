@@ -166,6 +166,16 @@ const siparisCol = [
     headerAlign: "left",
     type: "number",
     width: 150,
+    renderCell: (params) => {
+      return (
+        <strong>
+          {params.value.toLocaleString("tr-TR", {
+            style: "currency",
+            currency: "TRY",
+          })}
+        </strong>
+      );
+    },
   },
 ];
 

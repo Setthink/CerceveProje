@@ -37,9 +37,9 @@ public class CerceveprojeApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         Cerceve[] cerceves = new Cerceve[]{
-                new Cerceve("abc",15f,15f,15f),
-                new Cerceve("def",15f,15f,15f),
-                new Cerceve("ghi",15f,15f,15f),
+                new Cerceve("abc",200f,15f,15f),
+                new Cerceve("def",200f,15f,15f),
+                new Cerceve("ghi",200f,15f,15f),
         };
         cerceveRepository.saveAll(Arrays.asList(cerceves));
 
