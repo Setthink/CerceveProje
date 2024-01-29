@@ -6,4 +6,8 @@ public class MusteriNotFoundException extends EntityNotFoundException {
         super("Musteri", id);
     }
 
+    public MusteriNotFoundException(){
+        super("Musteri");
+    }
+
 }

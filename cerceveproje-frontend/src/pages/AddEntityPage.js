@@ -6,6 +6,11 @@ import Layout from "../components/Layout";
 import { useParams } from "react-router-dom";
 import { entityColumnsPost as entityColumns } from "../components/Constants";
 import CalculateSiparisFiyat from "../components/CalculateFiyat";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
 
 const AddEntityPage = () => {
   const { entityType } = useParams();
@@ -30,6 +35,13 @@ const AddEntityPage = () => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
+    }));
+  };
+
+  const handleDateChange = (date) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      siparisTarih: dayjs(date).format("YYYY-MM-DD"), // Send date in the correct format
     }));
   };
 
@@ -78,30 +90,49 @@ const AddEntityPage = () => {
   const renderFormFields = () => {
     return entityColumns[entityType].map((column) => {
       if (column.field !== "id") {
-        const isSiparis = entityType === "Siparis";
+        const isSiparisTarih = column.field === "siparisTarih";
         const isSiparisFiyat = column.field === "siparisFiyat";
+        const isSiparis = entityType === "Siparis";
         return (
-          <TextField
-            key={column.field}
-            label={column.headerName}
-            name={column.field}
-            type={column.type}
-            value={
-              formData[column.field] || (column.type === "string[]" ? "" : [])
-            }
-            onChange={handleChange}
-            placeholder={column.type === "date" ? "yyyy-mm-dd" : ""}
-            fullWidth
-            required={!isSiparis}
-            sx={{ my: 2 }}
-            disabled={column.field === "siparisFiyat"}
-            InputProps={
-              {readOnly: true} &&
-                isSiparisFiyat && {
-                  startAdornment: <div style={{ marginRight: "5px" }}>₺</div>,
+          <React.Fragment key={column.field}>
+            {isSiparisTarih ? (
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={["DatePicker"]}>
+                <DatePicker
+                  label={column.headerName}
+                  name={column.field}
+                  value={formData.siparisTarih ? dayjs(formData.siparisTarih) : dayjs()}
+                  onChange={handleDateChange}
+                  format="DD/MM/YYYY"
+                  textField={(props) => <TextField {...props} fullWidth />}
+                />
+                </DemoContainer>
+              </LocalizationProvider>
+            ) : (
+              <TextField
+                key={column.field}
+                label={column.headerName}
+                name={column.field}
+                type={column.type}
+                value={
+                  formData[column.field] ||
+                  (column.type === "string[]" ? "" : [])
                 }
-            }
-          />
+                onChange={handleChange}
+                placeholder={column.type === "date" ? "yyyy-mm-dd" : ""}
+                fullWidth
+                required={!isSiparis}
+                sx={{ my: 2 }}
+                disabled={column.field === "siparisFiyat"}
+                InputProps={
+                  { readOnly: true } &&
+                  isSiparisFiyat && {
+                    startAdornment: <div style={{ marginRight: "5px" }}>₺</div>,
+                  }
+                }
+              />
+            )}
+          </React.Fragment>
         );
       }
       return null;

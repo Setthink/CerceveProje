@@ -17,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class SiparisRequest {
 
+
     @Min(value = 0, message = "En 0'dan küçük olamaz")
     private float en;
 
@@ -35,7 +36,6 @@ public class SiparisRequest {
 
     private String siparisNot;
 
-    @NonNull
     private LocalDate siparisTarih;
 
     private float siparisFiyat;

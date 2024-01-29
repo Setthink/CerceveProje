@@ -44,8 +44,11 @@ public class SiparisServiceImpl implements SiparisService {
             throw new PaspartuNotFoundException(siparis.getPaspartuKodu().toString());
         else if (ayna.size() != siparis.getAynaKodu().size())
             throw new AynaNotFoundException(siparis.getAynaKodu().toString());
-        else if (musteriRepository.findById(siparis.getMusteriId()).isEmpty())
-            throw new MusteriNotFoundException(siparis.getMusteriId());
+        else if (siparis.getMusteriId() == null || musteriRepository.findById(siparis.getMusteriId()).isEmpty())
+            if (siparis.getMusteriId() == null)
+                throw new MusteriNotFoundException();
+            else
+                throw new MusteriNotFoundException(siparis.getMusteriId());
         else {
             Siparis siparis1 = new Siparis();
             try {
@@ -109,6 +112,7 @@ public class SiparisServiceImpl implements SiparisService {
     }
 
     public void calculateCerceveUsage(SiparisRequest siparis) {
+        if(siparis.getCerceveKodu().size() == 0) return;
         List<Cerceve> cerceve = cerceveRepository.findByCerceveKoduIn(siparis.getCerceveKodu());
         Cerceve firstCerceve = cerceve.get(0);
         float En = siparis.getEn();
