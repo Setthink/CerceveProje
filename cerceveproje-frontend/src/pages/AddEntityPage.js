@@ -98,14 +98,18 @@ const AddEntityPage = () => {
             {isSiparisTarih ? (
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={["DatePicker"]}>
-                <DatePicker
-                  label={column.headerName}
-                  name={column.field}
-                  value={formData.siparisTarih ? dayjs(formData.siparisTarih) : dayjs()}
-                  onChange={handleDateChange}
-                  format="DD/MM/YYYY"
-                  textField={(props) => <TextField {...props} fullWidth />}
-                />
+                  <DatePicker
+                    label={column.headerName}
+                    name={column.field}
+                    value={
+                      formData.siparisTarih
+                        ? dayjs(formData.siparisTarih)
+                        : dayjs()
+                    }
+                    onChange={handleDateChange}
+                    format="DD/MM/YYYY"
+                    textField={(props) => <TextField {...props} fullWidth />}
+                  />
                 </DemoContainer>
               </LocalizationProvider>
             ) : (
