@@ -128,12 +128,7 @@ const AddEntityPage = () => {
                 required={!isSiparis}
                 sx={{ my: 2 }}
                 disabled={column.field === "siparisFiyat"}
-                InputProps={
-                  { readOnly: true } &&
-                  isSiparisFiyat && {
-                    startAdornment: <div style={{ marginRight: "5px" }}>₺</div>,
-                  }
-                }
+                InputProps={isSiparisFiyat ? { readOnly: true, startAdornment: <div style={{ marginRight: "5px" }}>₺</div> } : {}}
               />
             )}
           </React.Fragment>
