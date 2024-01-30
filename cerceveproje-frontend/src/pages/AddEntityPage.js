@@ -108,7 +108,7 @@ const AddEntityPage = () => {
                     }
                     onChange={handleDateChange}
                     format="DD/MM/YYYY"
-                    textField={(props) => <TextField {...props} fullWidth />}
+                    textField={(props) => <TextField {...props}/>}
                   />
                 </DemoContainer>
               </LocalizationProvider>

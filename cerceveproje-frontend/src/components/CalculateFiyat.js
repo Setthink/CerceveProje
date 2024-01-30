@@ -98,17 +98,21 @@ const CalculateSiparisFiyat = ({
           const selectedCerceve = cerceveData.find(
             (cerceve) => cerceve.cerceveKodu === cerceveKoduValue
           );
-          if(cerceveKoduValues[0] === ""){
+          if (cerceveKoduValues[0] === "") {
             return totalFiyat;
           }
-          const en = parseFloat(formData[enField.field]) + selectedCerceve.cerceveGenislik * 2;
-          const boy = parseFloat(formData[boyField.field]) + selectedCerceve.cerceveGenislik * 2;
+          const en =
+            parseFloat(formData[enField.field]) +
+            selectedCerceve.cerceveGenislik * 2;
+          const boy =
+            parseFloat(formData[boyField.field]) +
+            selectedCerceve.cerceveGenislik * 2;
           const firstCerceveGenislik = parseFloat(firstCerceve.cerceveGenislik);
 
           if (selectedCerceve) {
-            if(selectedCerceve.cerceveKodu === cerceveKoduValues[0]){
+            if (selectedCerceve.cerceveKodu === cerceveKoduValues[0]) {
               const cerceveFiyat =
-                (en  + boy) * 2 * (selectedCerceve.cerceveFiyat/100);
+                (en + boy) * 2 * (selectedCerceve.cerceveFiyat / 100);
               return totalFiyat + cerceveFiyat;
             }
             if (
@@ -116,9 +120,10 @@ const CalculateSiparisFiyat = ({
               selectedCerceve.cerceveKodu === cerceveKoduValues[1]
             ) {
               const cerceveFiyat =
-              (((en + firstCerceveGenislik) * 2) +
-              ((boy + firstCerceveGenislik) * 2)) *
-              2 * (selectedCerceve.cerceveFiyat/100);
+                ((en + firstCerceveGenislik) * 2 +
+                  (boy + firstCerceveGenislik) * 2) *
+                2 *
+                (selectedCerceve.cerceveFiyat / 100);
               return totalFiyat + cerceveFiyat;
             }
             return totalFiyat;
@@ -138,14 +143,14 @@ const CalculateSiparisFiyat = ({
           const selectedPaspartu = paspartuData.find(
             (paspartu) => paspartu.paspartuKodu === paspartuKoduValue
           );
-          if(paspartuKoduValues[0] === ""){
+          if (paspartuKoduValues[0] === "") {
             return totalFiyat;
           }
           const en = parseFloat(formData[enField.field]);
           const boy = parseFloat(formData[boyField.field]);
           if (selectedPaspartu) {
             const paspartuFiyat =
-              en * boy * parseFloat(selectedPaspartu.paspartuFiyat)/10000;
+              (en * boy * parseFloat(selectedPaspartu.paspartuFiyat)) / 10000;
             return totalFiyat + paspartuFiyat;
           } else {
             const errorMessage = `Bu koda sahip paspartu bulunamadı: "${paspartuKoduValue}"`;
@@ -163,7 +168,7 @@ const CalculateSiparisFiyat = ({
           const selectedCam = camData.find(
             (cam) => cam.camKodu === camKoduValue
           );
-          if(camKoduValues[0] === ""){
+          if (camKoduValues[0] === "") {
             return totalFiyat;
           }
           const en = parseFloat(formData[enField.field]);
@@ -171,7 +176,7 @@ const CalculateSiparisFiyat = ({
 
           if (selectedCam) {
             const camFiyat =
-              en * boy * parseFloat(selectedCam.camFiyat)/10000;
+              (en * boy * parseFloat(selectedCam.camFiyat)) / 10000;
             return totalFiyat + camFiyat;
           } else {
             const errorMessage = `Bu koda sahip cam bulunamadı: "${camKoduValue}"`;
@@ -189,14 +194,14 @@ const CalculateSiparisFiyat = ({
           const selectedAyna = aynaData.find(
             (ayna) => ayna.aynaKodu === aynaKoduValue
           );
-          if(aynaKoduValue === ""){
+          if (aynaKoduValue === "") {
             return totalFiyat;
           }
           const en = parseFloat(formData[enField.field]);
           const boy = parseFloat(formData[boyField.field]);
           if (selectedAyna) {
             const aynaFiyat =
-              en * boy * parseFloat(selectedAyna.aynaFiyat)/10000;
+              (en * boy * parseFloat(selectedAyna.aynaFiyat)) / 10000;
             return totalFiyat + aynaFiyat;
           } else {
             const errorMessage = `Bu koda sahip ayna bulunamadı: "${aynaKoduValue}"`;

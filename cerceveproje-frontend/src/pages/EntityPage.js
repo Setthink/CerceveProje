@@ -81,7 +81,9 @@ const EntityPage = () => {
       setEntityData(dataWithDate);
     } catch (error) {
       toast.error(
-        ` ID'si  ${row.id} olan ${entityType} silinirken hata oluştu : ${`${error.response.data.message}`}`
+        ` ID'si  ${
+          row.id
+        } olan ${entityType} silinirken hata oluştu : ${`${error.response.data.message}`}`
       );
     }
   };
@@ -98,22 +100,22 @@ const EntityPage = () => {
       <div>
         {entityData && (
           <DataTable
-          rows={entityData}
-          columns={entityColumns[entityType]}
-          onEdit={handleEditEntity}
-          onDelete={handleDeleteEntity}
-          onSiparisler={handleSiparislerEntity}
-          entityType={entityType}
-        />
+            rows={entityData}
+            columns={entityColumns[entityType]}
+            onEdit={handleEditEntity}
+            onDelete={handleDeleteEntity}
+            onSiparisler={handleSiparislerEntity}
+            entityType={entityType}
+          />
         )}
         {entityType === "Musteri" && siparisData && (
           <DataTable
-          rows={siparisData}
-          columns={siparisCol}
-          onEdit={(row) => handleEditEntity(row)}
-          onDelete={(row) => handleDeleteEntity(row)} 
-          entityType={entityType} 
-        />
+            rows={siparisData}
+            columns={siparisCol}
+            onEdit={(row) => handleEditEntity(row)}
+            onDelete={(row) => handleDeleteEntity(row)}
+            entityType={entityType}
+          />
         )}
         {isEditFormOpen && (
           <EditForm

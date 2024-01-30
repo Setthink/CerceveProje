@@ -4,13 +4,20 @@ import { Button } from "@mui/material";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import "./DataTable.css";
 
-const DataTable = ({ rows, columns, onEdit, onDelete, onSiparisler,entityType}) => {
+const DataTable = ({
+  rows,
+  columns,
+  onEdit,
+  onDelete,
+  onSiparisler,
+  entityType,
+}) => {
   const actionColumn = {
     field: "İşlemler",
     width: 310,
     renderCell: (buttonn) => (
       <ButtonGroup variant="outlined" color="primary">
-        {entityType !== 'Siparis' && ( // Exclude "Güncelle" for Siparis
+        {entityType !== "Siparis" && ( // Exclude "Güncelle" for Siparis
           <Button color="success" onClick={() => onEdit(buttonn.row)}>
             Güncelle
           </Button>
