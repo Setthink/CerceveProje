@@ -1,11 +1,11 @@
 package com.setthink.cerceveproje.service.serviceImpl;
 
 import com.setthink.cerceveproje.entity.*;
+import com.setthink.cerceveproje.repository.*;
 import com.setthink.cerceveproje.exception.*;
 import com.setthink.cerceveproje.exception.notFound.*;
-import com.setthink.cerceveproje.repository.*;
 import com.setthink.cerceveproje.service.SiparisService;
-import com.setthink.cerceveproje.web.model.SiparisRequest;
+import com.setthink.cerceveproje.model.request.SiparisRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

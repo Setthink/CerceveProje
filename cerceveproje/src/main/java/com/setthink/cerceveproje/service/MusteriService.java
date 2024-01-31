@@ -1,19 +1,20 @@
 package com.setthink.cerceveproje.service;
 
-import com.setthink.cerceveproje.entity.Musteri;
+import com.setthink.cerceveproje.model.request.MusteriRequest;
+import com.setthink.cerceveproje.model.response.MusteriResponse;
 
 import java.util.List;
 
 public interface MusteriService {
 
-    Musteri getMusteri(Long id);
+    MusteriResponse getMusteri(Long id);
 
-    Musteri saveMusteri(Musteri musteri);
+    MusteriResponse saveMusteri(MusteriRequest musteri);
 
-    Musteri updateMusteri(Musteri musteri, Long id);
+    MusteriResponse updateMusteri(MusteriRequest musteri, Long id);
 
     void deleteMusteri(Long id);
 
-    List<Musteri> getAllMusteri();
+    List<MusteriResponse> getAllMusteri();
 
 }

@@ -1,6 +1,7 @@
 package com.setthink.cerceveproje.web.controller;
 
-import com.setthink.cerceveproje.entity.Musteri;
+import com.setthink.cerceveproje.model.request.MusteriRequest;
+import com.setthink.cerceveproje.model.response.MusteriResponse;
 import com.setthink.cerceveproje.service.MusteriService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -18,13 +19,13 @@ public class MusteriController {
     MusteriService musteriService;
 
     @GetMapping("{id}")
-    public ResponseEntity<Musteri> getMusteri(@PathVariable Long id) {
+    public ResponseEntity<MusteriResponse> getMusteri(@PathVariable Long id) {
         return new ResponseEntity<>(musteriService.getMusteri(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Musteri> saveMusteri(@Valid @RequestBody Musteri musteri) {
-        return new ResponseEntity<>(musteriService.saveMusteri(musteri), HttpStatus.CREATED);
+    public ResponseEntity<MusteriResponse> saveMusteri(@Valid @RequestBody MusteriRequest musteriRequest) {
+        return new ResponseEntity<>(musteriService.saveMusteri(musteriRequest), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
@@ -34,13 +35,13 @@ public class MusteriController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Musteri>> getAllMusteri() {
+    public ResponseEntity<List<MusteriResponse>> getAllMusteri() {
         return new ResponseEntity<>(musteriService.getAllMusteri(), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Musteri> updateMusteri(@PathVariable Long id, @Valid @RequestBody Musteri musteri) {
-        return new ResponseEntity<>(musteriService.updateMusteri(musteri, id), HttpStatus.OK);
+    public ResponseEntity<MusteriResponse> updateMusteri(@PathVariable Long id, @Valid @RequestBody MusteriRequest musteriRequest) {
+        return new ResponseEntity<>(musteriService.updateMusteri(musteriRequest, id), HttpStatus.OK);
     }
 
 }

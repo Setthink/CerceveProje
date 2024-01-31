@@ -1,19 +1,21 @@
 package com.setthink.cerceveproje.service;
 
 import com.setthink.cerceveproje.entity.Cam;
+import com.setthink.cerceveproje.model.request.CamRequest;
+import com.setthink.cerceveproje.model.response.CamResponse;
 
 import java.util.List;
 
 public interface CamService {
 
-    Cam getCam(Long id);
+    CamResponse getCam(Long id);
 
-    Cam saveCam(Cam cam);
+    CamResponse saveCam(CamRequest camRequest);
 
-    Cam updateCam(Cam cam, Long id);
+    CamResponse updateCam(CamRequest camRequest, Long id);
 
     void deleteCam(Long id);
 
-    List<Cam> getAllCam();
+    List<CamResponse> getAllCam();
 
 }

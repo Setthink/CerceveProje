@@ -1,19 +1,20 @@
 package com.setthink.cerceveproje.service;
 
-import com.setthink.cerceveproje.entity.Paspartu;
+import com.setthink.cerceveproje.model.request.PaspartuRequest;
+import com.setthink.cerceveproje.model.response.PaspartuResponse;
 
 import java.util.List;
 
 public interface PaspartuService {
 
-    Paspartu getPaspartu(Long id);
+    PaspartuResponse getPaspartu(Long id);
 
-    Paspartu savePaspartu(Paspartu paspartu);
+    PaspartuResponse savePaspartu(PaspartuRequest paspartu);
 
     void deletePaspartu(Long id);
 
-    Paspartu updatePaspartu(Paspartu paspartu, Long id);
+    PaspartuResponse updatePaspartu(PaspartuRequest paspartu, Long id);
 
-    List<Paspartu> getAllPaspartu();
+    List<PaspartuResponse> getAllPaspartu();
 
 }

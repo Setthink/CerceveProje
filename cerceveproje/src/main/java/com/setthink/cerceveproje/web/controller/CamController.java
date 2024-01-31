@@ -1,6 +1,7 @@
 package com.setthink.cerceveproje.web.controller;
 
-import com.setthink.cerceveproje.entity.Cam;
+import com.setthink.cerceveproje.model.request.CamRequest;
+import com.setthink.cerceveproje.model.response.CamResponse;
 import com.setthink.cerceveproje.service.CamService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -18,13 +19,13 @@ public class CamController {
     CamService camService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cam> getCam(@PathVariable Long id) {
+    public ResponseEntity<CamResponse> getCam(@PathVariable Long id) {
         return new ResponseEntity<>(camService.getCam(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Cam> saveCam(@Valid @RequestBody Cam cam) {
-        return new ResponseEntity<>(camService.saveCam(cam), HttpStatus.CREATED);
+    public ResponseEntity<CamResponse> saveCam(@Valid @RequestBody CamRequest camRequest) {
+        return new ResponseEntity<>(camService.saveCam(camRequest), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
@@ -34,13 +35,13 @@ public class CamController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Cam>> getAllCam() {
+    public ResponseEntity<List<CamResponse>> getAllCam() {
         return new ResponseEntity<>(camService.getAllCam(), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cam> updateCam(@PathVariable Long id, @Valid @RequestBody Cam cam) {
-        return new ResponseEntity<>(camService.updateCam(cam, id), HttpStatus.OK);
+    public ResponseEntity<CamResponse> updateCam(@PathVariable Long id, @Valid @RequestBody CamRequest camRequest) {
+        return new ResponseEntity<>(camService.updateCam(camRequest, id), HttpStatus.OK);
     }
 
 }

@@ -2,6 +2,9 @@ package com.setthink.cerceveproje.service.serviceImpl;
 
 import com.setthink.cerceveproje.entity.Musteri;
 import com.setthink.cerceveproje.exception.notFound.MusteriNotFoundException;
+import com.setthink.cerceveproje.model.mapper.MusteriMapper;
+import com.setthink.cerceveproje.model.request.MusteriRequest;
+import com.setthink.cerceveproje.model.response.MusteriResponse;
 import com.setthink.cerceveproje.repository.MusteriRepository;
 import com.setthink.cerceveproje.service.MusteriService;
 import lombok.AllArgsConstructor;
@@ -9,45 +12,54 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @AllArgsConstructor
 @Service
 public class MusteriServiceImpl implements MusteriService {
 
-    MusteriRepository musteriRepository;
+    private final MusteriRepository musteriRepository;
+    private final MusteriMapper musteriMapper;
 
     @Override
-    public Musteri getMusteri(Long id) {
+    public MusteriResponse getMusteri(Long id) {
         Optional<Musteri> optionalMusteri = musteriRepository.findById(id);
-        return unwrapMusteri(optionalMusteri, id);
+        Musteri musteri = unwrapMusteri(optionalMusteri, id);
+        return musteriMapper.toResponse(musteri);
     }
 
     @Override
-    public Musteri saveMusteri(Musteri musteri) {
-        return musteriRepository.save(musteri);
+    public MusteriResponse saveMusteri(MusteriRequest musteriRequest) {
+        Musteri musteriEntity = musteriMapper.toEntity(musteriRequest);
+        musteriRepository.save(musteriEntity);
+        return musteriMapper.toResponse(musteriEntity);
     }
 
     @Override
     public void deleteMusteri(Long id) {
         Optional<Musteri> optionalMusteri = musteriRepository.findById(id);
-        unwrapMusteri(optionalMusteri, id);
+        Musteri musteri = unwrapMusteri(optionalMusteri, id);
         musteriRepository.deleteById(id);
     }
 
     @Override
-    public Musteri updateMusteri(Musteri musteri, Long id) {
+    public MusteriResponse updateMusteri(MusteriRequest musteriRequest, Long id) {
         Optional<Musteri> optionalMusteri = musteriRepository.findById(id);
-        Musteri updatedMusteri = unwrapMusteri(optionalMusteri, id);
+        Musteri musteri = unwrapMusteri(optionalMusteri, id);
 
-        updatedMusteri.setMusteriAdi(musteri.getMusteriAdi());
-        updatedMusteri.setMusteriNumara(musteri.getMusteriNumara());
+        musteriMapper.toEntity(musteriRequest);
 
-        return musteriRepository.save(updatedMusteri);
+        Musteri updatedMusteri = musteriRepository.save(musteri);
+        return musteriMapper.toResponse(updatedMusteri);
     }
 
     @Override
-    public List<Musteri> getAllMusteri() {
-        return (List<Musteri>) musteriRepository.findAll();
+    public List<MusteriResponse> getAllMusteri() {
+        Iterable<Musteri> musteriIterable = musteriRepository.findAll();
+        List<Musteri> musteriList = StreamSupport.stream(musteriIterable.spliterator(), false)
+                .collect(Collectors.toList());
+        return musteriMapper.toResponseList(musteriList);
     }
 
     static Musteri unwrapMusteri(Optional<Musteri> entity, Long id) {

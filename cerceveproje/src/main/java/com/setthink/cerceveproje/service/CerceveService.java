@@ -1,18 +1,19 @@
 package com.setthink.cerceveproje.service;
 
-import com.setthink.cerceveproje.entity.Cerceve;
+import com.setthink.cerceveproje.model.request.CerceveRequest;
+import com.setthink.cerceveproje.model.response.CerceveResponse;
 
 import java.util.List;
 
 public interface CerceveService {
-    Cerceve getCerceve(Long id);
+    CerceveResponse getCerceve(Long id);
 
-    Cerceve saveCerceve(Cerceve cerceve);
+    CerceveResponse saveCerceve(CerceveRequest cerceve);
 
     void deleteCerceve(Long id);
 
-    Cerceve updateCerceve(Cerceve cerceve, Long id);
+    CerceveResponse updateCerceve(CerceveRequest cerceve, Long id);
 
-    List<Cerceve> getAllCerceve();
+    List<CerceveResponse> getAllCerceve();
 
 }

@@ -1,6 +1,7 @@
 package com.setthink.cerceveproje.web.controller;
 
-import com.setthink.cerceveproje.entity.Ayna;
+import com.setthink.cerceveproje.model.request.AynaRequest;
+import com.setthink.cerceveproje.model.response.AynaResponse;
 import com.setthink.cerceveproje.service.AynaService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -15,16 +16,16 @@ import java.util.List;
 @RequestMapping("/ayna")
 public class AynaController {
 
-    AynaService aynaService;
+    private final AynaService aynaService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Ayna> getAyna(@PathVariable Long id) {
+    public ResponseEntity<AynaResponse> getAyna(@PathVariable Long id) {
         return new ResponseEntity<>(aynaService.getAyna(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Ayna> saveAyna(@Valid @RequestBody Ayna ayna) {
-        return new ResponseEntity<>(aynaService.saveAyna(ayna), HttpStatus.CREATED);
+    public ResponseEntity<AynaResponse> saveAyna(@Valid @RequestBody AynaRequest aynaRequest) {
+        return new ResponseEntity<>(aynaService.saveAyna(aynaRequest), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
@@ -34,13 +35,12 @@ public class AynaController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Ayna>> getAllAyna() {
+    public ResponseEntity<List<AynaResponse>> getAllAyna() {
         return new ResponseEntity<>(aynaService.getAllAyna(), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Ayna> updateAyna(@PathVariable Long id, @Valid @RequestBody Ayna ayna) {
-        return new ResponseEntity<>(aynaService.updateAyna(ayna, id), HttpStatus.OK);
+    public ResponseEntity<AynaResponse> updateAyna(@PathVariable Long id, @Valid @RequestBody AynaRequest aynaRequest) {
+        return new ResponseEntity<>(aynaService.updateAyna(aynaRequest, id), HttpStatus.OK);
     }
-
 }

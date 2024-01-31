@@ -2,6 +2,9 @@ package com.setthink.cerceveproje.service.serviceImpl;
 
 import com.setthink.cerceveproje.entity.Paspartu;
 import com.setthink.cerceveproje.exception.notFound.PaspartuNotFoundException;
+import com.setthink.cerceveproje.model.mapper.PaspartuMapper;
+import com.setthink.cerceveproje.model.request.PaspartuRequest;
+import com.setthink.cerceveproje.model.response.PaspartuResponse;
 import com.setthink.cerceveproje.repository.PaspartuRepository;
 import com.setthink.cerceveproje.service.PaspartuService;
 import lombok.AllArgsConstructor;
@@ -9,22 +12,28 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @AllArgsConstructor
 @Service
 public class PaspartuServiceImpl implements PaspartuService {
 
-    PaspartuRepository paspartuRepository;
+    private final PaspartuRepository paspartuRepository;
+    private final PaspartuMapper paspartuMapper;
 
     @Override
-    public Paspartu getPaspartu(Long id) {
+    public PaspartuResponse getPaspartu(Long id) {
         Optional<Paspartu> optionalPaspartu = paspartuRepository.findById(id);
-        return unwrapPaspartu(optionalPaspartu, id);
+        Paspartu paspartu = unwrapPaspartu(optionalPaspartu, id);
+        return paspartuMapper.toResponse(paspartu);
     }
 
     @Override
-    public Paspartu savePaspartu(Paspartu paspartu) {
-        return paspartuRepository.save(paspartu);
+    public PaspartuResponse savePaspartu(PaspartuRequest paspartuRequest) {
+        Paspartu paspartuEntity = paspartuMapper.toEntity(paspartuRequest);
+        paspartuRepository.save(paspartuEntity);
+        return paspartuMapper.toResponse(paspartuEntity);
     }
 
     @Override
@@ -35,18 +44,23 @@ public class PaspartuServiceImpl implements PaspartuService {
     }
 
     @Override
-    public Paspartu updatePaspartu(Paspartu paspartu, Long id) {
+    public PaspartuResponse updatePaspartu(PaspartuRequest paspartuRequest, Long id) {
         Optional<Paspartu> optionalPaspartu = paspartuRepository.findById(id);
-        Paspartu updatedPaspartu = unwrapPaspartu(optionalPaspartu, id);
-        updatedPaspartu.setPaspartuKodu(paspartu.getPaspartuKodu());
-        updatedPaspartu.setPaspartuFiyat(paspartu.getPaspartuFiyat());
-        return paspartuRepository.save(updatedPaspartu);
+        Paspartu paspartu = unwrapPaspartu(optionalPaspartu, id);
+
+        paspartuMapper.toEntity(paspartuRequest);
+
+        Paspartu updatedPaspartu = paspartuRepository.save(paspartu);
+        return paspartuMapper.toResponse(updatedPaspartu);
     }
 
 
     @Override
-    public List<Paspartu> getAllPaspartu() {
-        return (List<Paspartu>) paspartuRepository.findAll();
+    public List<PaspartuResponse> getAllPaspartu() {
+        Iterable<Paspartu> paspartuIterable = paspartuRepository.findAll();
+        List<Paspartu> paspartuList = StreamSupport.stream(paspartuIterable.spliterator(), false)
+                .collect(Collectors.toList());
+        return paspartuMapper.toResponseList(paspartuList);
     }
 
 
@@ -58,11 +72,4 @@ public class PaspartuServiceImpl implements PaspartuService {
         }
     }
 
-    static Paspartu unwrapPaspartu(Optional<Paspartu> entity, String paspartuKodu) {
-        if (entity.isPresent()) {
-            return entity.get();
-        } else {
-            throw new PaspartuNotFoundException(paspartuKodu);
-        }
-    }
 }

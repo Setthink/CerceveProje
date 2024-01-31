@@ -1,7 +1,7 @@
 package com.setthink.cerceveproje.service;
 
 import com.setthink.cerceveproje.entity.Siparis;
-import com.setthink.cerceveproje.web.model.SiparisRequest;
+import com.setthink.cerceveproje.model.request.SiparisRequest;
 
 import java.util.List;
 

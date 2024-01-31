@@ -1,7 +1,7 @@
 package com.setthink.cerceveproje.web.controller;
 
 import com.setthink.cerceveproje.entity.Siparis;
-import com.setthink.cerceveproje.web.model.SiparisRequest;
+import com.setthink.cerceveproje.model.request.SiparisRequest;
 import com.setthink.cerceveproje.service.SiparisService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
